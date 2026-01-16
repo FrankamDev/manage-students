@@ -1,81 +1,88 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Livewire\Dashboard;
 
-use Illuminate\Http\Request;
+use Livewire\Component;
 use App\Models\AcademicYear;
 
-class AcademicYearController extends Controller
+class AcademicYears extends Component
 {
-    // Liste des années académiques
-    public function index()
-    {
-        $academicYears = AcademicYear::all();
-        return view('academic_years.index', compact('academicYears'));
-    }
+ // Champs du formulaire
+ public $libelle;
+ public $date_debut;
+ public $date_fin;
+ public $is_active = false;
 
-    // Formulaire création
-    public function create()
-    {
-        return view('academic_years.create');
-    }
+ // ID en cours pour modification
+ public $academicYearId = null;
 
-    // Enregistrement
-    public function store(Request $request)
-    {
-        $request->validate([
-            'libelle' => 'required|unique:academic_years,libelle',
-            'date_debut' => 'required|date',
-            'date_fin' => 'required|date|after_or_equal:date_debut',
-            'is_active' => 'nullable|boolean',
-        ]);
+ // Liste des années
+ public $academicYears = [];
 
-        // Si l'utilisateur coche "active", on désactive les autres
-        // if ($request->has('is_active') && $request->is_active) {
-        //     AcademicYear::where('is_active', true)->update(['is_active' => false]);
-        // }
+ // Méthode pour charger les années
+ public function mount()
+ {
+  $this->loadAcademicYears();
+ }
 
-        AcademicYear::create([
-            'libelle' => $request->libelle,
-            'date_debut' => $request->date_debut,
-            'date_fin' => $request->date_fin,
-            'is_active' => $request->has('is_active'),
-        ]);
+ public function loadAcademicYears()
+ {
+  $this->academicYears = AcademicYear::all();
+ }
 
-        return redirect()->route('academic-years.index')
-            ->with('success', 'Année académique créée avec succès');
-    }
+ // Créer ou mettre à jour
+ public function save()
+ {
+  if ($this->academicYearId) {
+   AcademicYear::find($this->academicYearId)->update([
+    'libelle' => $this->libelle,
+    'date_debut' => $this->date_debut,
+    'date_fin' => $this->date_fin,
+    'is_active' => $this->is_active,
+   ]);
+  } else {
+   AcademicYear::create([
+    'libelle' => $this->libelle,
+    'date_debut' => $this->date_debut,
+    'date_fin' => $this->date_fin,
+    'is_active' => $this->is_active,
+   ]);
+  }
 
-    // Formulaire édition
-    public function edit(AcademicYear $academicYear)
-    {
-        return view('academic_years.edit', compact('academicYear'));
-    }
+  $this->resetFields();
+  $this->loadAcademicYears();
+ }
 
-    // Mise à jour
-    public function update(Request $request, AcademicYear $academicYear)
-    {
-        $request->validate([
-            'libelle' => 'required|unique:academic_years,libelle,' . $academicYear->id,
-            'date_debut' => 'required|date',
-            'date_fin' => 'required|date|after_or_equal:date_debut',
-            'is_active' => 'nullable|boolean',
-        ]);
+ // Remplir le formulaire pour modification
+ public function edit($id)
+ {
+  $year = AcademicYear::find($id);
+  $this->academicYearId = $year->id;
+  $this->libelle = $year->libelle;
+  $this->date_debut = $year->date_debut;
+  $this->date_fin = $year->date_fin;
+  $this->is_active = $year->is_active;
+ }
 
-        if ($request->has('is_active') && $request->is_active) {
-            AcademicYear::where('is_active', true)
-                ->where('id', '!=', $academicYear->id)
-                ->update(['is_active' => false]);
-        }
+ // Supprimer une année
+ public function delete($id)
+ {
+  AcademicYear::find($id)->delete();
+  $this->loadAcademicYears();
+ }
 
-        $academicYear->update([
-            'libelle' => $request->libelle,
-            'date_debut' => $request->date_debut,
-            'date_fin' => $request->date_fin,
-            'is_active' => $request->has('is_active'),
-        ]);
+ // Réinitialiser le formulaire
+ private function resetFields()
+ {
+  $this->libelle = '';
+  $this->date_debut = '';
+  $this->date_fin = '';
+  $this->is_active = false;
+  $this->academicYearId = null;
+ }
 
-        return redirect()->route('academic-years.index')
-            ->with('success', 'Année académique mise à jour');
-    }
+ public function render()
+ {
+  return view('livewire.dashboard.academic-years');
+ }
 }

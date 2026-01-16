@@ -6,16 +6,14 @@ use Livewire\Component;
 
 class Dashboard extends Component
 {
-
  public $sidebarOpen = false;
  public $activeSection = 'dashboard';
 
- // Méthode pour toggle la sidebar (mobile)
  public function toggleSidebar()
  {
+
   $this->sidebarOpen = !$this->sidebarOpen;
  }
-
 
  public function setSection($section)
  {

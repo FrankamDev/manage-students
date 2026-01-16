@@ -4,11 +4,11 @@
 
     {{-- Formulaire --}}
     <form wire:submit.prevent="save" class="p-4 mb-6 bg-white rounded shadow">
-        <input type="text" wire:model="libelle" placeholder="Nom" class="p-2 mr-2 border">
-        <input type="date" wire:model="date_debut" class="p-2 mr-2 border">
-        <input type="date" wire:model="date_fin" class="p-2 mr-2 border">
+        <input type="text" wire:model.defer="libelle" placeholder="Nom" class="p-2 mr-2 border">
+        <input type="date" wire:model.defer="date_debut" class="p-2 mr-2 border">
+        <input type="date" wire:model.defer="date_fin" class="p-2 mr-2 border">
         <label class="mr-2">
-            <input type="checkbox" wire:model="is_active"> Active
+            <input type="checkbox" wire:model.defer="is_active"> Active
         </label>
         <button type="submit" class="px-4 py-2 text-white bg-blue-600 rounded">
             {{ $academicYearId ? 'Mettre à jour' : 'Créer' }}

@@ -239,7 +239,7 @@
                 <p>Bienvenue dans votre espace de gestion des notes !</p>
             @elseif($activeSection === 'eleves')
                 <h1 class="mb-6 text-3xl font-bold">Élèves</h1>
-                <p>Gestion des élèves ici...</p>
+                <p>Gestion des élèves ici...ccccc</p>
             @else
                 <h1 class="mb-6 text-3xl font-bold">Section : {{ $activeSection }}</h1>
             @endif

@@ -3,12 +3,14 @@
 use App\Http\Controllers\AcademicYearController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+
 
 Route::get('/', function () {
  return view('welcome');
 });
 
-Route::resource('academic-years', AcademicYearController::class);
+Route::resource('academic-years', AcademicYearController::class)->middleware('auth');
 
 Route::get('/dashboard', function () {
  return view('dashboard');
