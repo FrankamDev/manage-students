@@ -19,17 +19,30 @@ class AcademicYears extends Component
   $this->academicYears = AcademicYear::orderBy('date_debut', 'desc')->get();
   return view('livewire.dashboard.academic-years');
  }
-
+ public $hasError = false;
  public function save()
  {
-
-
   $rules = [
    'libelle' => 'required|string|max:255',
    'date_debut' => 'required|date',
    'date_fin' => 'required|date|after_or_equal:date_debut',
    'is_active' => 'boolean',
   ];
+
+  try {
+   $validated = $this->validate($rules);
+
+   if ($this->academicYearId) {
+    AcademicYear::findOrFail($this->academicYearId)->update($validated);
+   } else {
+    AcademicYear::create($validated);
+   }
+
+   $this->resetFields();
+  } catch (\Illuminate\Validation\ValidationException $e) {
+   $this->hasError = true; // active la pop-up
+   throw $e; // Livewire gère quand même l'affichage des erreurs
+  }
 
   if ($this->academicYearId !== null) {
    $rules['libelle'] .= '|unique:academic_years,libelle,' . (int) $this->academicYearId;
