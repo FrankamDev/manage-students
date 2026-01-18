@@ -2,27 +2,33 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Module extends Model
 {
+ use HasFactory;
 
-    use HasFactory;
+ protected $fillable = [
+  'specialty_id',
+  'code',
+  'name',
+  'coefficient',
+  'sequence',
+ ];
 
-    protected $fillable = [
-        'specialty_id',
-        'code',
-        'name',
-        'coefficient',
-        'module',
-    ];
-
-    protected $casts = [
-        'coefficient' => 'integer',
-        'module' => 'integer',
-    ];
-    public function specialty()
-    {
-        return $this->belongsTo(Specialty::class);
-    }
+ // Un module appartient à une spécialité
+ public function specialty()
+ {
+  return $this->belongsTo(Specialty::class);
+ }
+ public function student()
+ {
+  return $this->belongsTo(Student::class);
+ }
+ // Un module peut avoir plusieurs évaluations
+ public function evaluations()
+ {
+  return $this->hasMany(Evaluations::class);
+ }
 }
