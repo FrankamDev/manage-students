@@ -8,12 +8,15 @@ use Filament\Resources\Pages\EditRecord;
 
 class EditTeacher extends EditRecord
 {
-    protected static string $resource = TeacherResource::class;
-
-    protected function getHeaderActions(): array
-    {
-        return [
-            DeleteAction::make(),
-        ];
-    }
+ protected static string $resource = TeacherResource::class;
+ protected function getRedirectUrl(): string
+ {
+  return $this->getResource()::getUrl('index');
+ }
+ protected function getHeaderActions(): array
+ {
+  return [
+   DeleteAction::make(),
+  ];
+ }
 }

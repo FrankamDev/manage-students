@@ -3,20 +3,21 @@
 namespace App\Filament\Admin\Resources\Specialties\Pages;
 
 use App\Filament\Admin\Resources\Specialties\SpecialtyResource;
-use Filament\Actions\DeleteAction;
-use Filament\Resources\Pages\EditRecord;
+use Filament\Actions\Action;
+use Filament\Actions\EditAction;
+use Filament\Resources\Pages\ViewRecord;
 
-class EditSpecialty extends EditRecord
+class ViewSpecialities extends ViewRecord
 {
  protected static string $resource = SpecialtyResource::class;
- protected function getRedirectUrl(): string
- {
-  return $this->getResource()::getUrl('index');
- }
+
  protected function getHeaderActions(): array
  {
   return [
-   DeleteAction::make(),
+   // EditAction::make(),
+   Action::make('retour')
+    ->label('Retout')
+    ->url(SpecialtyResource::getUrl('index'))
   ];
  }
 }
