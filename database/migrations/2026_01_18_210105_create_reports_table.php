@@ -14,10 +14,13 @@ return new class extends Migration {
     $table->foreignId('student_id')->constrained()->onDelete('cascade');
     $table->foreignId('academic_year_id')->constrained()->onDelete('cascade');
     $table->decimal('average', 5, 2)->nullable();
+    $table->string('decision')->nullable();
+    $table->string('mention')->nullable();
+    $table->tinyInteger('semester')->after('academic_year_id');
     $table->text('remark')->nullable();
     $table->timestamps();
 
-    $table->unique(['student_id', 'academic_year_id'], 'unique_report');
+    $table->unique(['student_id', 'academic_year_id', 'semester'], 'unique_report');
    });
   }
  }

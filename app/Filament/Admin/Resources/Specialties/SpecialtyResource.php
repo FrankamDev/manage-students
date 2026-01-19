@@ -41,9 +41,9 @@ class SpecialtyResource extends Resource
  {
   return [
    'index' => ListSpecialties::route('/'),
-   'create' => CreateSpecialty::route('/create'),
-   'edit' => EditSpecialty::route('/{record}/edit'),
-   'view' => EditSpecialty::route('/{record}'),
+   // 'create' => CreateSpecialty::route('/create'),
+   // 'edit' => EditSpecialty::route('/{record}/edit'),
+   // 'view' => EditSpecialty::route('/{record}'),
   ];
  }
 }

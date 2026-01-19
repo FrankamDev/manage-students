@@ -16,33 +16,33 @@ use Filament\Tables\Table;
 
 class TeacherResource extends Resource
 {
-    protected static ?string $model = Teacher::class;
+ protected static ?string $model = Teacher::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+ protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    public static function form(Schema $schema): Schema
-    {
-        return TeacherForm::configure($schema);
-    }
+ public static function form(Schema $schema): Schema
+ {
+  return TeacherForm::configure($schema);
+ }
 
-    public static function table(Table $table): Table
-    {
-        return TeachersTable::configure($table);
-    }
+ public static function table(Table $table): Table
+ {
+  return TeachersTable::configure($table);
+ }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
+ public static function getRelations(): array
+ {
+  return [
+   //
+  ];
+ }
 
-    public static function getPages(): array
-    {
-        return [
-            'index' => ListTeachers::route('/'),
-            'create' => CreateTeacher::route('/create'),
-            'edit' => EditTeacher::route('/{record}/edit'),
-        ];
-    }
+ public static function getPages(): array
+ {
+  return [
+   'index' => ListTeachers::route('/'),
+   // 'create' => CreateTeacher::route('/create'),
+   // 'edit' => EditTeacher::route('/{record}/edit'),
+  ];
+ }
 }

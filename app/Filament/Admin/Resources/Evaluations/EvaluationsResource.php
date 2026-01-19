@@ -16,33 +16,33 @@ use Filament\Tables\Table;
 
 class EvaluationsResource extends Resource
 {
-    protected static ?string $model = Evaluations::class;
+ protected static ?string $model = Evaluations::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+ protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    public static function form(Schema $schema): Schema
-    {
-        return EvaluationsForm::configure($schema);
-    }
+ public static function form(Schema $schema): Schema
+ {
+  return EvaluationsForm::configure($schema);
+ }
 
-    public static function table(Table $table): Table
-    {
-        return EvaluationsTable::configure($table);
-    }
+ public static function table(Table $table): Table
+ {
+  return EvaluationsTable::configure($table);
+ }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
+ public static function getRelations(): array
+ {
+  return [
+   //
+  ];
+ }
 
-    public static function getPages(): array
-    {
-        return [
-            'index' => ListEvaluations::route('/'),
-            'create' => CreateEvaluations::route('/create'),
-            'edit' => EditEvaluations::route('/{record}/edit'),
-        ];
-    }
+ public static function getPages(): array
+ {
+  return [
+   'index' => ListEvaluations::route('/'),
+   // 'create' => CreateEvaluations::route('/create'),
+   // 'edit' => EditEvaluations::route('/{record}/edit'),
+  ];
+ }
 }

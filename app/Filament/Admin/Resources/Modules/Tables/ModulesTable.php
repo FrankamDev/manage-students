@@ -14,7 +14,8 @@ class ModulesTable
  {
   return $table
    ->columns([
-    TextColumn::make('code')->searchable()->sortable(),
+    TextColumn::make('code')
+     ->searchable()->sortable(),
     TextColumn::make('name')->label('Nom')->searchable(),
     TextColumn::make('specialty.name')->label('Spécialité')->sortable(),
     TextColumn::make('coefficient')->sortable(),

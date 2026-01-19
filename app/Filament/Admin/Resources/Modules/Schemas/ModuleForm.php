@@ -34,7 +34,6 @@ class ModuleForm
      ->numeric()
      ->required(),
 
-
    ]);
  }
 }

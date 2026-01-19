@@ -168,8 +168,10 @@
                   <livewire:dashboard.students />
               @elseif ($activeSection === 'annee')
                   <livewire:dashboard.academic-years />
-              @else
-                  <h1 class="mb-6 text-3xl font-bold">Section : {{ $activeSection }}</h1>
+              @elseif ($activeSection === 'Rapports')
+                  <livewire:dashboard.report>
+                  @else
+                      <h1 class="mb-6 text-3xl font-bold">Section : {{ $activeSection }}</h1>
               @endif
           </div>
       </main>

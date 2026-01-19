@@ -8,12 +8,15 @@ use Filament\Resources\Pages\EditRecord;
 
 class EditAcademicYear extends EditRecord
 {
-    protected static string $resource = AcademicYearResource::class;
-
-    protected function getHeaderActions(): array
-    {
-        return [
-            DeleteAction::make(),
-        ];
-    }
+ protected static string $resource = AcademicYearResource::class;
+ protected function getRedirectUrl(): string
+ {
+  return $this->getResource()::getUrl('index');
+ }
+ protected function getHeaderActions(): array
+ {
+  return [
+   DeleteAction::make(),
+  ];
+ }
 }

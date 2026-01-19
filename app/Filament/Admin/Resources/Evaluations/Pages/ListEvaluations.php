@@ -8,12 +8,13 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListEvaluations extends ListRecords
 {
-    protected static string $resource = EvaluationsResource::class;
-
-    protected function getHeaderActions(): array
-    {
-        return [
-            CreateAction::make(),
-        ];
-    }
+ protected static string $resource = EvaluationsResource::class;
+ protected static ?string $title = "Toutes les evaluations";
+ protected function getHeaderActions(): array
+ {
+  return [
+   CreateAction::make()
+    ->createAnother(false)
+  ];
+ }
 }

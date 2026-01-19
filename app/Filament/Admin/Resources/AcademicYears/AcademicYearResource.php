@@ -9,6 +9,9 @@ use App\Filament\Admin\Resources\AcademicYears\Schemas\AcademicYearForm;
 use App\Filament\Admin\Resources\AcademicYears\Tables\AcademicYearsTable;
 use App\Models\AcademicYear;
 use BackedEnum;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -18,7 +21,7 @@ class AcademicYearResource extends Resource
 {
  protected static ?string $model = AcademicYear::class;
 
- protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+ // protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
  public static function form(Schema $schema): Schema
  {

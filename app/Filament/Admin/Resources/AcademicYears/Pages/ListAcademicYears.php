@@ -8,12 +8,12 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListAcademicYears extends ListRecords
 {
-    protected static string $resource = AcademicYearResource::class;
-
-    protected function getHeaderActions(): array
-    {
-        return [
-            CreateAction::make(),
-        ];
-    }
+ protected static string $resource = AcademicYearResource::class;
+ protected static ?string $title = "Toutes les annees";
+ protected function getHeaderActions(): array
+ {
+  return [
+   CreateAction::make(),
+  ];
+ }
 }
